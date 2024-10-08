@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class TenantController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('blog.index', [
-            'blogs' => Blog::all(),
-        ]);
+        //
     }
 
     /**
@@ -22,7 +20,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blog.create');
+        //
     }
 
     /**
@@ -30,19 +28,13 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->get('title'));
-        $blog = new Blog();
-        $blog->title = $request->title;
-        $blog->body = $request->body;
-        $blog->user_id = auth()->user()->id;
-        $blog->save();
-        return redirect()->route('blog.index');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(Tenant $tenant)
     {
         //
     }
@@ -50,17 +42,15 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Tenant $tenant)
     {
-        return view('blog.edit', [
-            'blog' => Blog::findOrFail($id),
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Tenant $tenant)
     {
         //
     }
@@ -68,7 +58,7 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy(Tenant $tenant)
     {
         //
     }

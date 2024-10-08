@@ -22,16 +22,34 @@ class BoxController extends Controller
      */
     public function create()
     {
-        //
+        return view('box.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    // Validation des données (facultatif mais recommandé)
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'location' => 'required|string|max:255',
+        'size' => 'required|integer',
+    ]);
+
+    // Créer une nouvelle box et assigner l'utilisateur connecté
+    $box = new Box();
+    $box->name = $request->name;
+    $box->description = $request->description;        
+    $box->location = $request->location;
+    $box->size = $request->size;
+    $box->user_id = auth()->user()->id; // Assigner l'ID de l'utilisateur authentifié
+    $box->save();
+
+    return redirect()->route('box.index')->with('success', 'Box créée avec succès.');
+}
+
 
     /**
      * Display the specified resource.

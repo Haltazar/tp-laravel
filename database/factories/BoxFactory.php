@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,13 +18,10 @@ class BoxFactory extends Factory
     public function definition(): array
     {
         return [
-            'ref' => fake()->uuid(),
-            'location' => fake()->streetAddress(),
-            'description' => fake()->paragraph(),
-            'user_id' => fake()->numberBetween(1,10),
-            'daily_price' => fake()->randomFloat(2, 10, 20),
-            'weekly_price' => fake()->randomFloat(2, 60, 80),
-            'monthly_price' => fake()->randomFloat(2, 200, 280),
+            'name' => $this->faker->name(),
+            'location' => $this->faker->address(),
+            'size' => $this->faker->numberBetween(10, 100),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -14,20 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('surname');
             $table->string('email')->unique();
+            $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->string('street')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country')->nullable();
-            $table->string('post_code')->nullable();
-            $table->boolean('is_admin')->default(false);
-            $table->string('iban')->nullable();
-            $table->string('bic')->nullable();
-            $table->string('bank_name')->nullable();
-            $table->integer('card_number')->nullable();
-            $table->integer('expiration_day')->nullable();
-            $table->integer('expiration_month')->nullable();
+            $table->enum('company_type', ['public', 'private'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

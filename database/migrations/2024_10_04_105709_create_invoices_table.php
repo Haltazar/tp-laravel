@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boxes', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('ref');
-            $table->string('location');
-            $table->string('description');
-            $table->foreignId('user_id');
-            $table->float('daily_price');
-            $table->float('weekly_price');
-            $table->float('monthly_price');
+            $table->foreignId('contract_id')->constrained()->onDelete('cascade'); // Lien avec le contrat
+            $table->dateTime('invoice_date');
+            $table->decimal('amount', 10, 2);
+            $table->enum('status', ['paid', 'unpaid']);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('boxes');
+        Schema::dropIfExists('invoices');
     }
 };

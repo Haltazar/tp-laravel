@@ -15,6 +15,12 @@ class Box extends Model
         'name',
         'location',
         'size',
+        'description',
+        'daily_price',
+        'status',
+        'ref',
+        'weekly_price',
+        'monthly_price',
     ];
 
     public function user(): BelongsTo

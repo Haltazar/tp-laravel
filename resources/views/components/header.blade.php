@@ -6,7 +6,7 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('asset/img/BoxManagerLogo.webp') }}" alt="Logo" class="h-8 w-auto sm:h-10" />
+                            <img src="{{ asset('asset/img/BoxManagerLogo.webp') }}" alt="Logo" class="h-8 w-8 sm:h-10" />
                         </a>
                     </div>
                 </div>
@@ -14,53 +14,53 @@
                 <ul class="flex items-center space-x-4">
                     <?php $user = Auth::user(); ?>
                     @isset($user)
-    <!-- Lien du profil utilisateur -->
-    <li>
-        <a href="{{ route('profile.edit') }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-            {{ $user->name }}
-        </a>
-    </li>
+                    <!-- Lien du profil utilisateur -->
+                    <li>
+                        <a href="{{ route('profile.edit') }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                            {{ $user->name }}
+                        </a>
+                    </li>
 
-    <!-- Lien Mes Infos avec menu déroulant -->
-    <li class="relative">
-        <a href="#" id="dropdown-toggle" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-            Mes Infos
-        </a>
+                    <!-- Lien Mes Infos avec menu déroulant -->
+                    <li class="relative">
+                        <a href="#" id="dropdown-toggle" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                            Mes Infos
+                        </a>
 
-        <!-- Menu déroulant toujours présent mais masqué au départ, visible au clic -->
-        <ul id="dropdown-menu" class="absolute hidden text-gray-700 bg-white shadow-lg rounded-md mt-2 w-48 dark:bg-gray-800 dark:text-gray-300">
-            <li>
-                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Mes Box
-                </a>
-            </li>
-            <li>
-                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Mes Factures
-                </a>
-            </li>
-            <li>
-                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Mes Contrats
-                </a>
-            </li>
-            <li>
-                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Mes Impôts
-                </a>
-            </li>
-        </ul>
-    </li>
+                        <!-- Menu déroulant toujours présent mais masqué au départ, visible au clic -->
+                        <ul id="dropdown-menu" class="absolute hidden text-gray-700 bg-white shadow-lg rounded-md mt-2 w-48 dark:bg-gray-800 dark:text-gray-300">
+                            <li>
+                                <a href="{{ route('box.userBoxes') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes Box
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes Factures
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes Contrats
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes Impôts
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-    <!-- Lien pour se déconnecter -->
-    <li>
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-            Se déconnecter
-        </button>
-    </form>
-</li>
+                    <!-- Lien pour se déconnecter -->
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                                Se déconnecter
+                            </button>
+                        </form>
+                    </li>
 
                     @else
                     <!-- Sinon, vérifier si on est sur la page 'register' ou 'login' et afficher le bon lien -->
@@ -91,9 +91,9 @@
 </header>
 
 <script>
-    document.getElementById('dropdown-toggle').addEventListener('click', function (event) {
-        event.preventDefault();  // Empêche le lien d'être suivi
+    document.getElementById('dropdown-toggle').addEventListener('click', function(event) {
+        event.preventDefault(); // Empêche le lien d'être suivi
         let dropdownMenu = document.getElementById('dropdown-menu');
-        dropdownMenu.classList.toggle('hidden');  // Affiche/masque le menu
+        dropdownMenu.classList.toggle('hidden'); // Affiche/masque le menu
     });
 </script>

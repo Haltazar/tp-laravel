@@ -13,9 +13,17 @@ class BoxController extends Controller
      */
     public function index()
     {
-        return view('box.index', [
-            'boxes' => Box::all(),
-        ]);
+        $user = auth()->user();
+
+        // Vérifier si l'utilisateur est connecté
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos box.');
+        }
+
+        // Récupérer les box de l'utilisateur
+        $boxes = Box::where('user_id', $user->id)->get();
+
+        return view('box.index', compact('boxes'));
     }
 
     /**
@@ -30,31 +38,31 @@ class BoxController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validation des données (facultatif mais recommandé)
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'location' => 'required|string|max:255',
-        'size' => 'required|integer',
-        'status' => 'required|string|max:255',
-        'ref' => 'required|string|max:255',
-        'weekly_price' => 'required|numeric',
-        'monthly_price' => 'required|numeric',
-        'daily_price' => 'required|numeric',
-    ]);
+    {
+        // Validation des données (facultatif mais recommandé)
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'location' => 'required|string|max:255',
+            'size' => 'required|integer',
+            'status' => 'required|string|max:255',
+            'ref' => 'required|string|max:255',
+            'weekly_price' => 'required|numeric',
+            'monthly_price' => 'required|numeric',
+            'daily_price' => 'required|numeric',
+        ]);
 
-    // Créer une nouvelle box et assigner l'utilisateur connecté
-    $box = new Box();
-    $box->name = $request->name;
-    $box->description = $request->description;        
-    $box->location = $request->location;
-    $box->size = $request->size;
-    $box->user_id = auth()->user()->id; // Assigner l'ID de l'utilisateur authentifié
-    $box->save();
+        // Créer une nouvelle box et assigner l'utilisateur connecté
+        $box = new Box();
+        $box->name = $request->name;
+        $box->description = $request->description;
+        $box->location = $request->location;
+        $box->size = $request->size;
+        $box->user_id = auth()->user()->id; // Assigner l'ID de l'utilisateur authentifié
+        $box->save();
 
-    return redirect()->route('box.index')->with('success', 'Box créée avec succès.');
-}
+        return redirect()->route('box.index')->with('success', 'Box créée avec succès.');
+    }
 
 
     /**
@@ -113,21 +121,4 @@ class BoxController extends Controller
 
         return redirect()->route('box.userBoxes')->with('success', 'Box supprimée avec succès.');
     }
-
-
-    public function userBoxes()
-    {
-        $user = auth()->user();
-
-        // Vérifier si l'utilisateur est connecté
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos box.');
-        }
-
-        // Récupérer les box de l'utilisateur
-        $boxes = Box::where('user_id', $user->id)->get();
-
-        return view('box.userBoxes', compact('boxes'));
-    }
-
 }

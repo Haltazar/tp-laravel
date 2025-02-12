@@ -17,12 +17,23 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
-        'password',
-        'address',
         'phone',
-        'company_type',
+        'address',
+        'city',
+        'country',
+        'postal_code',
+        'is_owner',
+        'iban',
+        'bic',
+        'bank_name',
+        'card_number',
+        'expiration_month',
+        'expiration_year',
+        'password',
+        'phone',
     ];
 
     /**
@@ -46,5 +57,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function boxes()
+    {
+        return $this->hasMany(Box::class, 'user_id');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'user_id');
     }
 }

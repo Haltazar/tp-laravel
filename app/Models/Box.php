@@ -17,14 +17,19 @@ class Box extends Model
         'size',
         'description',
         'daily_price',
-        'status',
-        'ref',
         'weekly_price',
         'monthly_price',
+        'ref',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
 }

@@ -17,36 +17,46 @@
                     <!-- Lien du profil utilisateur -->
                     <li>
                         <a href="{{ route('profile.edit') }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-                            {{ $user->name }}
+                            {{ $user->firstname }}
                         </a>
                     </li>
 
                     <!-- Lien Mes Infos avec menu déroulant -->
                     <li class="relative">
                         <a href="#" id="dropdown-toggle" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-                            Mes Infos
+                            Menu
                         </a>
 
                         <!-- Menu déroulant toujours présent mais masqué au départ, visible au clic -->
                         <ul id="dropdown-menu" class="absolute hidden text-gray-700 bg-white shadow-lg rounded-md mt-2 w-48 dark:bg-gray-800 dark:text-gray-300">
                             <li>
-                                <a href="{{ route('box.userBoxes') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes Box
+                                <a href="{{ route('box.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes boxes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('reservation.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes réservations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes locataires
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes Factures
+                                    Mes factures
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes Contrats
+                                    Mes contrats
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes Impôts
+                                    Mes impôts
                                 </a>
                             </li>
                         </ul>

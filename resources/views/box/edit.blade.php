@@ -52,15 +52,6 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Statut</label>
-                        <select name="status" class="w-full mt-1 p-2 border rounded-md dark:bg-gray-700 dark:text-white">
-                            <option value="available" {{ $box->status == 'available' ? 'selected' : '' }}>Disponible</option>
-                            <option value="reserved" {{ $box->status == 'reserved' ? 'selected' : '' }}>Réservé</option>
-                            <option value="unavailable" {{ $box->status == 'unavailable' ? 'selected' : '' }}>Indisponible</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
                         <textarea name="description" rows="4"
                             class="w-full mt-1 p-2 border rounded-md dark:bg-gray-700 dark:text-white">{{ $box->description }}</textarea>
@@ -68,8 +59,8 @@
 
                     <!-- Boutons -->
                     <div class="flex justify-between mt-6">
-                        <x-secondary-button>
-                            <a href="{{ route('box.index') }}">Annuler</a>
+                        <x-secondary-button onclick="window.history.back()">
+                            Annuler
                         </x-secondary-button>
 
                         <x-primary-button type="submit">

@@ -8,6 +8,7 @@ use App\Models\ContractModel;
 use App\Models\Tenant;
 use App\Models\Contract;
 use App\Models\Invoice;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // Tenant::factory(100)->create();
         // ContractModel::factory(15)->create();
         // Contract::factory(10)->create();
-        Invoice::factory(10)->create();
+        // Invoice::factory(10)->create();
+        Reservation::factory(10)->create();
     }
 }

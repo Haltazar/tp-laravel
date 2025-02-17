@@ -10,42 +10,40 @@ class Contract extends Model
     use HasFactory;
 
     protected $fillable = [
-        'box_id',
-        'tenant_id',
-        'user_id',
         'contract_model_id',
+        'user_id',
+        'owner_id',
+        'box_id',
+        'content',
         'start_date',
-        'end_date',
-        'monthly_rent',
+        'end_date'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function tenant()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function contrat_model()
+    public function owner()
     {
-        return $this->belongsTo(ContractModel::class);
+        return $this->belongsTo(User::class, 'owner_id'); 
+    }
+
+    public function contractModel()
+    {
+        return $this->belongsTo(ContractModel::class, 'contract_model_id');
     }
 
     public function box()
     {
-        return $this->belongsTo(Box::class);
+        return $this->belongsTo(Box::class, 'box_id');
     }
 
-    // Relation avec les paiements (un contrat a plusieurs paiements)
     public function payments()
     {
         return $this->hasMany(Payment::class);
     }
 
-    // Relation avec les factures (un contrat a plusieurs factures)
     public function invoices()
     {
         return $this->hasMany(Invoice::class);

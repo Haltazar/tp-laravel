@@ -22,9 +22,6 @@
                 </x-primary-button>
                 @endif
             </div>
-
-<<<<<<< Updated upstream
-            <!-- Les réservations -->
             <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-lg text-center">
                 <img src="https://picsum.photos/200/300" alt="Interface intuitive" class="h-40 w-full object-cover mb-4">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Gestion des réservations</h2>
@@ -39,40 +36,6 @@
                 </x-primary-button>
                 @endif
             </div>
-
-            <!-- Visualisation des locataires -->
-            <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-lg text-center">
-                <img src="https://picsum.photos/200/300" alt="Sécurité des données" class="h-40 w-full object-cover mb-4">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Visualisation des locataires</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">
-                    Visualisez les informations de vos locataires et les réservations qu'ils ont faites.
-                </p>
-                @if(auth()->user())
-                <x-primary-button class="mt-4">
-                    <a href="{{ route('user.index') }}" class="block w-full h-full text-center">
-                        Voir mes locataires
-                    </a>
-                </x-primary-button>
-                @endif
-            </div>
-
-=======
->>>>>>> Stashed changes
-            <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-lg text-center">
-                <img src="https://picsum.photos/200/300" alt="Interface intuitive" class="h-40 w-full object-cover mb-4">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Gestion des réservations</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">
-                    Gérez vos réservations de vos box avec une interface simple et intuitive.
-                </p>
-                @if(auth()->user())
-                <x-primary-button class="mt-4">
-                    <a href="{{ route('reservation.index') }}" class="block w-full h-full text-center">
-                        Voir mes réservations
-                    </a>
-                </x-primary-button>
-                @endif
-            </div>
-
             <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-lg text-center">
                 <img src="https://picsum.photos/200/300" alt="Sécurité des données" class="h-40 w-full object-cover mb-4">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Visualisation des locataires</h2>
@@ -118,7 +81,6 @@
                 @endif
             </div>
 
-            <!-- Suivi des paiements et factures -->
             <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-lg text-center">
                 <img src="https://picsum.photos/200/300" alt="Suivi des factures" class="h-40 w-full object-cover mb-4">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Facturation</h2>
@@ -127,7 +89,7 @@
                 </p>
                 @if(auth()->user())
                 <x-primary-button class="mt-4">
-                    <a href="{{ route('box.index') }}" class="block w-full h-full text-center">
+                    <a href="{{ route('invoice.index') }}" class="block w-full h-full text-center">
                         Voir mes factures
                     </a>
                 </x-primary-button>

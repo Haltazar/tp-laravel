@@ -48,11 +48,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('contract.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes contrats
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{ route('contract-model.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     Mes modèles de contrats
                                 </a>
@@ -69,8 +64,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- Lien pour se déconnecter -->
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -81,7 +74,6 @@
                     </li>
 
                     @else
-                    <!-- Sinon, vérifier si on est sur la page 'register' ou 'login' et afficher le bon lien -->
                     @if(Route::currentRouteName() == 'register')
                     <li>
                         <a href="{{ route('login') }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">

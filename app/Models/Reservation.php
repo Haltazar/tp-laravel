@@ -30,6 +30,6 @@ class Reservation extends Model
 
     public function box()
     {
-        return $this->belongsTo(Box::class);
+        return $this->belongsTo(Box::class, 'box_id');
     }
 }

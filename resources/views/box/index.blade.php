@@ -22,6 +22,13 @@
                     @endforeach
                     @endif
                 </div>
+                <div class="flex justify-center">
+                    <x-primary-button class="mt-4">
+                        <a href="{{ route('box.create') }}" class="block w-full h-full text-center">
+                            Ajouter une box
+                        </a>
+                    </x-primary-button>
+                </div>
             </div>
         </div>
     </div>

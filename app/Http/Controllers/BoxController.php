@@ -39,29 +39,30 @@ class BoxController extends Controller
      */
     public function store(Request $request)
     {
-        // Validation des données (facultatif mais recommandé)
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'location' => 'required|string|max:255',
-            'size' => 'required|integer',
-            'status' => 'required|string|max:255',
-            'ref' => 'required|string|max:255',
-            'weekly_price' => 'required|numeric',
-            'monthly_price' => 'required|numeric',
-            'daily_price' => 'required|numeric',
+            'name'          => 'required|string|max:255',
+            'location'      => 'required|string|max:255',
+            'size'          => 'required|numeric|min:1',
+            'description'   => 'required|string',
+            'daily_price'   => 'required|numeric|min:0',
+            'weekly_price'  => 'required|numeric|min:0',
+            'monthly_price' => 'required|numeric|min:0',
+            'ref'           => 'required|string|max:50|unique:boxes,ref',
         ]);
 
-        // Créer une nouvelle box et assigner l'utilisateur connecté
-        $box = new Box();
-        $box->name = $request->name;
-        $box->description = $request->description;
-        $box->location = $request->location;
-        $box->size = $request->size;
-        $box->user_id = auth()->user()->id; // Assigner l'ID de l'utilisateur authentifié
-        $box->save();
+        Box::create([
+            'user_id'       => auth()->user()->id,
+            'name'          => $request->name,
+            'location'      => $request->location,
+            'size'          => $request->size,
+            'description'   => $request->description,
+            'daily_price'   => $request->daily_price,
+            'weekly_price'  => $request->weekly_price,
+            'monthly_price' => $request->monthly_price,
+            'ref'           => $request->ref,
+        ]);
 
-        return redirect()->route('box.index')->with('success', 'Box créée avec succès.');
+        return redirect()->route('box.index')->with('success', 'Box created successfully.');
     }
 
 

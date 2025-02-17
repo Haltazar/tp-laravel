@@ -10,7 +10,7 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Prix à la journée : {{ $box->daily_price }} €</p>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Prix hebdomadaire : {{ $box->weekly_price }} €</p>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Prix mensuel : {{ $box->monthly_price }} €</p>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Propriétaire : {{ $box->user->name }}</p>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Propriétaire : {{ $box->user->firstname }} {{ $box->user->lastname }}</p>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Contact : {{ $box->user->phone }}</p>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 max-w-md">Description : {{ $box->description }}</p>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Taille : {{ $box->size }} m²</p>

@@ -14,20 +14,18 @@
                 <ul class="flex items-center space-x-4">
                     <?php $user = Auth::user(); ?>
                     @isset($user)
-                    <!-- Lien du profil utilisateur -->
+
                     <li>
                         <a href="{{ route('profile.edit') }}" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                             {{ $user->firstname }}
                         </a>
                     </li>
 
-                    <!-- Lien Mes Infos avec menu déroulant -->
                     <li class="relative">
                         <a href="#" id="dropdown-toggle" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                             Menu
                         </a>
 
-                        <!-- Menu déroulant toujours présent mais masqué au départ, visible au clic -->
                         <ul id="dropdown-menu" class="absolute hidden text-gray-700 bg-white shadow-lg rounded-md mt-2 w-48 dark:bg-gray-800 dark:text-gray-300">
                             <li>
                                 <a href="{{ route('box.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -45,17 +43,27 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Mes factures
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <a href="{{ route('contract.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     Mes contrats
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <a href="{{ route('contract.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes contrats
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('contract-model.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes modèles de contrats
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('invoice.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Mes factures
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('tax.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     Mes impôts
                                 </a>
                             </li>

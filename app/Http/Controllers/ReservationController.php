@@ -21,14 +21,9 @@ class ReservationController extends Controller
     /**
      * Affiche une réservation spécifique du propriétaire connecté.
      */
-    public function show($id)
+    public function show(Reservation $reservation)
     {
-        $ownerId = auth()->id();
-        $reservation = Reservation::where('id', $id)
-            ->where('owner_id', $ownerId)
-            ->with(['user', 'box'])
-            ->firstOrFail();
-
+        $reservation->load(['user', 'box']);
         return view('reservation.show', compact('reservation'));
     }
 

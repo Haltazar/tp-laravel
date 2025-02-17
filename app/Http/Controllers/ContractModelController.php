@@ -2,64 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContractModel;
 use Illuminate\Http\Request;
+use App\Models\ContractModel;
 
 class ContractModelController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Affiche la liste des modèles de contrat de l'utilisateur connecté.
      */
     public function index()
     {
-        //
+        $models = ContractModel::where('owner_id', auth()->user()->id)->get();
+        return view('contract-model.index', compact('models'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire de création d'un modèle.
      */
     public function create()
     {
-        //
+        return view('contract-model.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stocke un nouveau modèle de contrat.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        ContractModel::create([
+            'owner_id' => auth()->user()->id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('contract-model.index')->with('success', 'Modèle créé avec succès.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(ContractModel $contractModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire d'édition d'un modèle.
      */
     public function edit(ContractModel $contractModel)
     {
-        //
+        return view('contract-model.edit', compact('contractModel'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour un modèle existant.
      */
     public function update(Request $request, ContractModel $contractModel)
     {
-        //
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $contractModel->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('contract-model.index')->with('success', 'Modèle mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un modèle.
      */
     public function destroy(ContractModel $contractModel)
     {
-        //
+        $contractModel->delete();
+
+        return redirect()->route('contract-model.index')->with('success', 'Modèle supprimé avec succès.');
+    }
+
+    /**
+     * Affiche le modèle.
+     */
+    public function show(ContractModel $contractModel)
+    {
+        return view('contract-model.show', compact('contractModel'));
     }
 }

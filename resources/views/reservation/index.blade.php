@@ -14,15 +14,17 @@
                         <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">
                             {{ $reservation->box->name }}
                         </h3>
-                        <div class="flex flex-col gap-1 justify-center">
+                        <div class="flex flex-col gap-1 justify-center w-full">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 <strong>Locataire :</strong> {{ $reservation->user->firstname }} {{ $reservation->user->lastname }}
                             </p>
-                            <x-primary-button>
-                                <a href="{{ route('user.show', $reservation->user) }}" class="block w-full h-full text-center">
-                                    Informations
-                                </a>
-                            </x-primary-button>
+                            <div class="mt-4 flex justify-center">
+                                <x-primary-button class="">
+                                    <a href="{{ route('user.show', $reservation->user) }}" class="block text-center">
+                                        Informations
+                                    </a>
+                                </x-primary-button>
+                            </div>
                         </div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">
                             <strong>Début :</strong> {{ \Carbon\Carbon::parse($reservation->start_at)->translatedFormat('l j F Y') }}
@@ -35,6 +37,17 @@
                         <div class="mt-4 flex justify-center gap-2">
                             <a href="{{ route('reservation.show', $reservation) }}" class="text-blue-500 hover:underline">Voir plus</a>
                         </div>
+
+                        <div class="flex justify-center gap-2">
+                            <form method="POST" action="{{ route('contract.generate') }}">
+                                @csrf
+                                <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                                <x-primary-button type="submit" class="w-full">
+                                    Générer le contrat
+                                </x-primary-button>
+                            </form>
+                        </div>
+
                     </div>
                     @endforeach
                     @endif

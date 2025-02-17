@@ -4,20 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Contract;
+use App\Models\User;
+use App\Models\Box;
+use Carbon\Carbon;
 
 class ContractModel extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'owner_id',
         'title',
         'content',
     ];
 
-    public function user()
+    public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function contracts()
@@ -25,16 +29,47 @@ class ContractModel extends Model
         return $this->hasMany(Contract::class);
     }
 
-    // Fonction pour remplacer les variables dans le contenu
-    public function replaceVariables(array $variables)
+    /**
+     * Génère un contrat en remplaçant les variables par les données du locataire
+     */
+    public function generateContract(User $tenant, User $owner, Box $box, $start_date, $end_date)
     {
-        $content = $this->content;
+        $variables = [
+            'nom' => $tenant->firstname,
+            'prenom' => $tenant->lastname,
+            'adresse' => $tenant->address,
+            'ville' => $tenant->city,
+            'code_postal' => $tenant->postal_code,
+            'telephone' => $tenant->phone,
+            'email' => $tenant->email,
+            'nom_proprietaire' => $owner->firstname,
+            'prenom_proprietaire' => $owner->lastname,
+            'adresse_proprietaire' => $owner->address,
+            'nom_du_box' => $box->name,
+            'adresse_du_box' => $box->location,
+            'prix_journalier' => $box->daily_price,
+            'prix_hebdomadaire' => $box->weekly_price,
+            'prix_mensuel' => $box->monthly_price,
+            'date_du_jour' => Carbon::now()->format('d-m-Y'),
+            'ville_proprietaire' => $owner->city,
+            'date_de_debut' => $this->start_date,
+            'date_de_fin' => $this->end_date,
+        ];
 
-        foreach ($variables as $key => $value) {
-            // Remplace les variables dans le contenu
-            $content = str_replace('{' . $key . '}', $value, $content);
-        }
+        $contract_content = str_replace(
+            array_map(fn($k) => '{' . $k . '}', array_keys($variables)),
+            array_values($variables),
+            $this->content
+        );
 
-        return $content;
+        return Contract::create([
+            'contract_model_id' => $this->id,
+            'user_id' => $tenant->id,
+            'owner_id' => $owner->id,
+            'box_id' => $box->id,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'content' => $contract_content,
+        ]);
     }
 }

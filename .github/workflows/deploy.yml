@@ -13,6 +13,16 @@ jobs:
     - name: 📥 Cloner le repo
       uses: actions/checkout@v3
 
+    - name: Configure SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H IP_DU_VPS >> ~/.ssh/known_hosts
+
+    - name: Test SSH connection
+      run: ssh -i ~/.ssh/id_rsa root@IP_DU_VPS "echo 'Connexion réussie !'"
+
     - name: 📡 Déployer sur le VPS via SSH
       uses: appleboy/ssh-action@master
       with:

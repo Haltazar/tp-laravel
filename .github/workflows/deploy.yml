@@ -21,7 +21,7 @@ jobs:
         ssh-keyscan -H IP_DU_VPS >> ~/.ssh/known_hosts
 
     - name: Test SSH connection
-      run: ssh -i ~/.ssh/id_rsa root@IP_DU_VPS "echo 'Connexion réussie !'"
+      run: ssh -i ~/.ssh/id_rsa root@192.162.68.95 "echo 'Connexion réussie !'"
 
     - name: 📡 Déployer sur le VPS via SSH
       uses: appleboy/ssh-action@master
